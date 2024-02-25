@@ -5,7 +5,7 @@
 #include <string.h>
 
 int* read_data() {
-    FILE *fp = fopen("data.txt", "r");
+    FILE *fp = fopen("score.txt", "r");
     const char s[3] = ", ";
     char *token;
     int count = 0;
@@ -25,6 +25,10 @@ int* read_data() {
             token = strtok(NULL, s);
         }
         scores -= count;
+    } else {
+        *scores = 0;
+        *(scores + 1) = 0;
+        fopen("score.txt", "a");
     }
     return scores;
 }
@@ -138,7 +142,7 @@ int main()
     }
 
     
-    FILE *fp = fopen("data.txt", "r+");
+    FILE *fp = fopen("score.txt", "r+");
     fprintf(fp, "%d, %d", *player_score, *computer_score);
 
     free(scores);
