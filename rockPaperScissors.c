@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <curses.h>
-#include<unistd.h>
+#include <unistd.h>
 
 int* read_data() {
     FILE *fp = fopen("score.txt", "r");
@@ -102,9 +101,9 @@ void show_rules(){
     printf("=====================================================================\n");
     printf("Choice: ");
 
-    int input = 0;
-    while(input != 1) {
-        scanf("%d", &input);
+    char input = 0;
+    while(input != '1') {
+        scanf("%c", &input);
     }
 }
 
@@ -113,11 +112,11 @@ int main()
     time_t t;
     srand((unsigned) time(&t));
     int *scores = read_data();
-    int option = 0;
+    char option = 0;
     int *player_score = scores;
     int *computer_score = scores+1;
 
-    while (option != 3)
+    while (option != '3')
     {
         system("clear");
         printf("=====================================================================\n");
@@ -129,16 +128,17 @@ int main()
         printf(" (3) quit\n");
         printf("=====================================================================\n");
         printf("Choice: ");
-        scanf("%d", &option);
+        scanf("\n%c", &option);
+
         switch (option)
         {
-            case 1: play_round(player_score, computer_score);break;
+            case '1': play_round(player_score, computer_score);break;
 
-            case 2: show_rules();break;
+            case '2': show_rules();break;
 
-            case 3: ;break;
+            case '3': ;break;
 
-            default: printf("invalid input\n");
+            default: printf("invalid input\n"); sleep(3);
         }
 
     }
@@ -148,5 +148,6 @@ int main()
     fprintf(fp, "%d, %d", *player_score, *computer_score);
 
     free(scores);
+    system("clear");
     return 0;
 }
