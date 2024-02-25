@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
-int* read_data() {
+int* read_scores() {
     FILE *fp = fopen("score.txt", "r");
     const char s[3] = ", ";
     char *token;
@@ -31,6 +31,16 @@ int* read_data() {
         fopen("score.txt", "a");
     }
     return scores;
+}
+
+int write_scores(int* player_score, int* computer_score) {
+    FILE *fp;
+    if (fp = fopen("score.txt", "r+")) {
+        fprintf(fp, "%d, %d", *player_score, *computer_score);
+    } else {
+        printf("scores could not be saved, sorry\n");
+    }
+    return 0;
 }
 
 void play_round(int* player_score, int* computer_score) {
@@ -107,11 +117,12 @@ void show_rules(){
     }
 }
 
-int main()
-{
+int enterRPSMenu() {
+    
     time_t t;
     srand((unsigned) time(&t));
-    int *scores = read_data();
+
+    int *scores = read_scores();
     char option = 0;
     int *player_score = scores;
     int *computer_score = scores+1;
@@ -143,11 +154,15 @@ int main()
 
     }
 
+    write_scores(player_score, computer_score);
     
-    FILE *fp = fopen("score.txt", "r+");
-    fprintf(fp, "%d, %d", *player_score, *computer_score);
-
     free(scores);
     system("clear");
+    return 0;
+}
+
+int main()
+{
+    enterRPSMenu();
     return 0;
 }
