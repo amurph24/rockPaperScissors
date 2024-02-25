@@ -1,8 +1,9 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #include <string.h>
+#include <curses.h>
+#include<unistd.h>
 
 int* read_data() {
     FILE *fp = fopen("score.txt", "r");
@@ -34,7 +35,7 @@ int* read_data() {
 }
 
 void play_round(int* player_score, int* computer_score) {
-    system("cls");
+    system("clear");
     char pc_choice = (rand() % 3);
     char player_choice;
 
@@ -55,6 +56,7 @@ void play_round(int* player_score, int* computer_score) {
 
     } while (!player_choice);
 
+    //TODO make this more maintainable and updatable, remove magic numbers
     switch (pc_choice)
     {
         case 0: pc_choice = 112;break;
@@ -68,28 +70,28 @@ void play_round(int* player_score, int* computer_score) {
     {
         // loss
         case -3:; case 1:; case 2:
-            printf("You lost!");
+            printf("You lost!\n");
             (*computer_score)++;
             break;
         // win
         case -2:; case -1:; case 3:
-            printf("You won!");
+            printf("You won!\n");
             (*player_score)++;
             break;
         // draw
         case 0:
-            printf("You drew!");
+            printf("You drew!\n");
             break;
 
         default:
-            printf("invalid result, something went wrong");
+            printf("invalid result, something went wrong\n");
     }
-    Sleep(3*1000);
+    sleep(3);
     return;
 }
 
 void show_rules(){
-    system("cls");
+    system("clear");
     printf("=====================================================================\n");
     printf("Pick rock, paper or scissors. The computer will also pick rock, paper or scissors.\n");
     printf(" Rock beats Scissors\n");
@@ -117,7 +119,7 @@ int main()
 
     while (option != 3)
     {
-        system("cls");
+        system("clear");
         printf("=====================================================================\n");
         printf("This is Rock Paper Scissors, your score vs the computer is: %d - %d\n\n", *player_score, *computer_score);
 
@@ -146,6 +148,5 @@ int main()
     fprintf(fp, "%d, %d", *player_score, *computer_score);
 
     free(scores);
-    system("cls");
     return 0;
 }
