@@ -68,9 +68,9 @@ void play_round(int* player_score, int* computer_score) {
     //TODO make this more maintainable and updatable, remove magic numbers
     switch (pc_choice)
     {
-        case 0: pc_choice = 112;break;
-        case 1: pc_choice = 114;break;
-        case 2: pc_choice = 115;break;
+        case 0: pc_choice = 'p';break;
+        case 1: pc_choice = 'r';break;
+        case 2: pc_choice = 's';break;
         default: printf("internal error");
     }
     printf("%c vs %c\n", player_choice, pc_choice);
@@ -99,7 +99,7 @@ void play_round(int* player_score, int* computer_score) {
     return;
 }
 
-void show_rules(){
+int show_rules(){
     system("clear");
     printf("=====================================================================\n");
     printf("Pick rock, paper or scissors. The computer will also pick rock, paper or scissors.\n");
@@ -115,6 +115,12 @@ void show_rules(){
     while(input != '1') {
         scanf("%c", &input);
     }
+    return 0;
+}
+
+int reset_scores(int* score1, int* score2) {
+    *score1 = *score2 = 0;
+    return 0;
 }
 
 int enterRPSMenu() {
@@ -127,18 +133,19 @@ int enterRPSMenu() {
     int *player_score = scores;
     int *computer_score = scores+1;
 
-    while (option != '3')
+    while (option != '4')
     {
         system("clear");
         printf("=====================================================================\n");
         printf("This is Rock Paper Scissors, your score vs the computer is: %d - %d\n\n", *player_score, *computer_score);
 
-        printf("What would you like to do?\n");
-        printf(" (1) play\n");
-        printf(" (2) rules/controls\n");
-        printf(" (3) quit\n");
-        printf("=====================================================================\n");
-        printf("Choice: ");
+        printf( "What would you like to do?\n"
+                " (1) play\n"
+                " (2) rules/controls\n"
+                " (3) reset scores (cannot be reversed)\n"
+                " (4) save scores and quit\n"
+                "=====================================================================\n"
+                "Choice: ");
         scanf("\n%c", &option);
 
         switch (option)
@@ -147,7 +154,9 @@ int enterRPSMenu() {
 
             case '2': show_rules();break;
 
-            case '3': ;break;
+            case '3': reset_scores(player_score, computer_score);break;
+
+            case '4': ;break;
 
             default: printf("invalid input\n"); sleep(3);
         }
