@@ -4,6 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
+
 int* read_scores() {
     FILE *fp = fopen("score.txt", "r");
     const char s[3] = ", ";
@@ -49,13 +50,13 @@ void play_round(int* player_score, int* computer_score) {
     char player_choice;
 
     do {
-        printf("=====================================================================\n");
-        printf("Pick scissors (s), paper (p), or rock (r)\n");
-        printf(" (s) scissors\n");
-        printf(" (p) paper\n");
-        printf(" (r) rock\n");
-        printf("=====================================================================\n");
-        printf("Choice: ");
+        printf( "=====================================================================\n"
+                "Pick scissors (s), paper (p), or rock (r)\n"
+                " (s) scissors\n"
+                " (p) paper\n"
+                " (r) rock\n"
+                "=====================================================================\n"
+                "Choice: ");
         scanf(" %c", &player_choice);
 
         if (player_choice != 112 && player_choice != 114 && player_choice != 115) {
@@ -65,7 +66,7 @@ void play_round(int* player_score, int* computer_score) {
 
     } while (!player_choice);
 
-    //TODO make this more maintainable and updatable, remove magic numbers
+    //TODO make this more maintainable and updatable, remove magic numbers; use adjacency matrix
     switch (pc_choice)
     {
         case 0: pc_choice = 'p';break;
@@ -101,15 +102,15 @@ void play_round(int* player_score, int* computer_score) {
 
 int show_rules(){
     system("clear");
-    printf("=====================================================================\n");
-    printf("Pick rock, paper or scissors. The computer will also pick rock, paper or scissors.\n");
-    printf(" Rock beats Scissors\n");
-    printf(" Scissors beat paper\n");
-    printf(" Paper beats rock\n\n");
+    printf("=====================================================================\n"
+            "Pick rock, paper or scissors. The computer will also pick rock, paper or scissors.\n"
+            " Rock beats Scissors\n"
+            " Scissors beat paper\n"
+            " Paper beats rock\n\n"
 
-    printf(" (1) Go back\n");
-    printf("=====================================================================\n");
-    printf("Choice: ");
+            " (1) Go back\n"
+            "=====================================================================\n"
+            "Choice: ");
 
     char input = 0;
     while(input != '1') {
