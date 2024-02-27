@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <time.h>
+#include <unistd.h>
 
 void play_round(int* player_score, int* computer_score) {
     system("clear");
@@ -23,7 +24,7 @@ void play_round(int* player_score, int* computer_score) {
 
     } while (!player_choice);
 
-    //TODO make this more maintainable and updatable, remove magic numbers; use adjacency matrix
+    //TODO make this more maintainable and updatable, remove magic numbers; use adjacency matrix and MACROS
     switch (pc_choice)
     {
         case 0: pc_choice = 'p';break;
@@ -78,5 +79,39 @@ int show_rules(){
 
 int reset_scores(int* score1, int* score2) {
     *score1 = *score2 = 0;
+    return 0;
+}
+
+int enter_menu(int* player_score, int* computer_score) {
+    time_t t;
+    srand((unsigned) time(&t));
+    char option = 0;
+
+    while (option != '4')
+    {
+        system("clear");
+        printf("=====================================================================\n");
+        printf("This is Rock Paper Scissors, your score vs the computer is: %d - %d\n\n", *player_score, *computer_score);
+
+        printf( "What would you like to do?\n"
+                " (1) play\n"
+                " (2) rules/controls\n"
+                " (3) reset scores (cannot be reversed)\n"
+                " (4) save scores and quit\n"
+                "=====================================================================\n"
+                "Choice: ");
+        scanf("\n%c", &option);
+
+        switch (option)
+        {
+            case '1': play_round(player_score, computer_score);break;
+            case '2': show_rules();break;
+            case '3': reset_scores(player_score, computer_score);break;
+            case '4': ;break;
+            default: printf("invalid input\n"); sleep(3);
+        }
+
+    }
+    system("clear");
     return 0;
 }

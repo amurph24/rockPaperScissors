@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int* read_scores() {
     FILE *fp = fopen("score.txt", "r");
@@ -12,7 +14,6 @@ int* read_scores() {
         char line[40];
         fgets(line, sizeof(line), fp);
         token = strtok(line, s);
-        // TODO: return token reference and parse in main()
         while (token != NULL)
         {
             temp = atoi(token);
