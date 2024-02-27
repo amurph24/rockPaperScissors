@@ -3,10 +3,12 @@
 #include <string.h>
 
 #define SCORECOUNT 2
-#define SCOREFILE_PATH "/var/lib/rockPaperScissors/score.txt" // replace score.txt with this macro before completing project
+
+// TODO: fix access to SCOREFILE_PATH, cannot create or read file
+#define SCOREFILE_PATH "/var/lib/rps/score.txt"
 
 void read_scores(int* player_score, int* computer_score) {
-    FILE *fp = fopen("score.txt", "r");
+    FILE *fp = fopen(SCOREFILE_PATH, "r");
     const char s[3] = ", ";
     char *token;
     int count = 0;
@@ -26,7 +28,7 @@ void read_scores(int* player_score, int* computer_score) {
     } else {
         *scores = 0;
         *(scores + 1) = 0;
-        fopen("score.txt", "a");
+        fopen(SCOREFILE_PATH, "a");
     }
 
     *player_score = *scores;
@@ -38,7 +40,7 @@ void read_scores(int* player_score, int* computer_score) {
 
 int write_scores(int* player_score, int* computer_score) {
     FILE *fp;
-    if (fp = fopen("score.txt", "r+")) {
+    if ((fp = fopen("SCOREFILE_PATH", "r+"))) {
         fprintf(fp, "%d, %d", *player_score, *computer_score);
     } else {
         printf("scores could not be saved, sorry\n");
