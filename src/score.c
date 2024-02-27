@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-int* read_scores() {
+#include<unistd.h>
+
+int* read_scores(int* player_score, int* computer_score) {
     FILE *fp = fopen("score.txt", "r");
     const char s[3] = ", ";
     char *token;
@@ -27,6 +29,10 @@ int* read_scores() {
         *(scores + 1) = 0;
         fopen("score.txt", "a");
     }
+
+    *player_score = *scores;
+    *computer_score = *(scores+1);
+
     return scores;
 }
 
