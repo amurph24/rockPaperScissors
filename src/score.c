@@ -2,12 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define SCORECOUNT 2
+#define SCOREFILE_PATH "/var/lib/rockPaperScissors/score.txt" // replace score.txt with this macro before completing project
+
 void read_scores(int* player_score, int* computer_score) {
     FILE *fp = fopen("score.txt", "r");
     const char s[3] = ", ";
     char *token;
     int count = 0;
-    int *scores = (int*) malloc(sizeof(int)*2);
+    int *scores = (int*) malloc(sizeof(int)*SCORECOUNT);
     if (fp != NULL)
     {
         char line[40];
