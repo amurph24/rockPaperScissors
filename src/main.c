@@ -1,7 +1,9 @@
 #include "score.h"
 #include "gameScreens.h"
+#include <stdlib.h>
 
 int rps() {
+    // TODO: change read_scores() --> read_scores(player_score, computer_score)
     int *scores = read_scores();
     int *player_score = scores;
     int *computer_score = scores+1;

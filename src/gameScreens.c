@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <string.h>
 
 void play_round(int* player_score, int* computer_score) {
     system("clear");
