@@ -4,7 +4,7 @@
 
 #include<unistd.h>
 
-int* read_scores(int* player_score, int* computer_score) {
+void read_scores(int* player_score, int* computer_score) {
     FILE *fp = fopen("score.txt", "r");
     const char s[3] = ", ";
     char *token;
@@ -32,8 +32,7 @@ int* read_scores(int* player_score, int* computer_score) {
 
     *player_score = *scores;
     *computer_score = *(scores+1);
-
-    return scores;
+    return;
 }
 
 int write_scores(int* player_score, int* computer_score) {
