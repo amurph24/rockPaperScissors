@@ -2,14 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include<unistd.h>
-
 void read_scores(int* player_score, int* computer_score) {
     FILE *fp = fopen("score.txt", "r");
     const char s[3] = ", ";
     char *token;
     int count = 0;
-    int temp;
     int *scores = (int*) malloc(sizeof(int)*2);
     if (fp != NULL)
     {
@@ -18,8 +15,7 @@ void read_scores(int* player_score, int* computer_score) {
         token = strtok(line, s);
         while (token != NULL)
         {
-            temp = atoi(token);
-            *scores = temp;
+            *scores = atoi(token);
             scores++; count++;
             token = strtok(NULL, s);
         }
@@ -32,6 +28,8 @@ void read_scores(int* player_score, int* computer_score) {
 
     *player_score = *scores;
     *computer_score = *(scores+1);
+    free(scores);
+
     return;
 }
 
