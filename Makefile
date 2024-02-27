@@ -25,4 +25,5 @@ clean:
 
 uninstall:
 	rm -f $(INSTALL_PATH)/bin/$(TARGET)
-	rm -f $(SCORE_DATA_PATH/$(TARGET))
+	rm -f $(SCORE_DATA_PATH)/$(TARGET)/score.txt
+	rm -df $(SCORE_DATA_PATH)/$(TARGET)
