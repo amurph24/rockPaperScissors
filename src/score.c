@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <errno.h>
-#include <unistd.h>
 
 #define SCORECOUNT 2
 
@@ -49,13 +47,6 @@ int write_scores(int* player_score, int* computer_score) {
     } else {
         printf("scores could not be saved, sorry\n");
         printf("errno: %s\n", strerror(errno));
-    }
-
-    if (access(SCOREFILE_PATH, F_OK) == 0) {
-        printf("file can be accessed\n");
-    } else {
-        printf("file cannot be accessed, errno: %s\n", strerror(errno));
-        printf("searched for file at location: %s\n", SCOREFILE_PATH);
     }
     return 0;
 }

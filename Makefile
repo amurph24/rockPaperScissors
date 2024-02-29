@@ -17,9 +17,8 @@ object:
 	$(COMPILER) $(COMPILER_FLAGS) $(INCLUDE_PATH) -c src/*.c
 
 install: $(TARGET)
-	install -m777 $(TARGET) $(INSTALL_PATH)/bin
-	mkdir -p $(SCORE_DATA_PATH)/$(TARGET)
-	chmod a+rw $(SCORE_DATA_PATH)/$(TARGET)
+	install -m755 $(TARGET) $(INSTALL_PATH)/bin
+	mkdir -p -m777 $(SCORE_DATA_PATH)/$(TARGET)
 
 clean: 
 	rm -f $(OBJECT_FILES) $(TARGET)
