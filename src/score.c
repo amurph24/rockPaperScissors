@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <errno.h>
+#include <unistd.h>
+
 #define SCORECOUNT 2
 
 // TODO: fix access to SCOREFILE_PATH, cannot create or read file
@@ -13,6 +16,7 @@ void read_scores(int* player_score, int* computer_score) {
     char *token;
     int count = 0;
     int *scores = (int*) malloc(sizeof(int)*SCORECOUNT);
+    // TODO: condense conditional
     if (fp != NULL)
     {
         char line[40];
@@ -39,11 +43,19 @@ void read_scores(int* player_score, int* computer_score) {
 }
 
 int write_scores(int* player_score, int* computer_score) {
-    FILE *fp;
-    if ((fp = fopen("SCOREFILE_PATH", "r+"))) {
+    FILE *fp = fopen(SCOREFILE_PATH, "r+");
+    if (fp) {
         fprintf(fp, "%d, %d", *player_score, *computer_score);
     } else {
         printf("scores could not be saved, sorry\n");
+        printf("errno: %s\n", strerror(errno));
+    }
+
+    if (access(SCOREFILE_PATH, F_OK) == 0) {
+        printf("file can be accessed\n");
+    } else {
+        printf("file cannot be accessed, errno: %s\n", strerror(errno));
+        printf("searched for file at location: %s\n", SCOREFILE_PATH);
     }
     return 0;
 }
