@@ -4,8 +4,6 @@
 #include <errno.h>
 
 #define SCORECOUNT 2
-
-// TODO: fix access to SCOREFILE_PATH, cannot create or read file
 #define SCOREFILE_PATH "/var/lib/rps/score.txt"
 
 void read_scores(int* player_score, int* computer_score) {
