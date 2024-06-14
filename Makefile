@@ -24,6 +24,6 @@ clean:
 	rm -f $(OBJECT_FILES) $(TARGET)
 
 uninstall:
-	rm -f $(INSTALL_PATH)/bin/$(TARGET)
 	rm -f $(SCORE_DATA_PATH)/$(TARGET)/score.txt
 	rm -df $(SCORE_DATA_PATH)/$(TARGET)
+	rm -f $(INSTALL_PATH)/bin/$(TARGET)
